@@ -150,6 +150,13 @@ public class Snappy
         int uPos = uncompressed.position();
         int uLen = uncompressed.remaining();
         int cPos = compressed.position();
+
+        int requiredCapacity = maxCompressedLength(uLen);
+        if (compressed.remaining() < requiredCapacity) {
+            throw new IllegalArgumentException("not enough space for output: need " + requiredCapacity
+                    + " bytes, but only " + compressed.remaining() + " remaining");
+        }
+
         int compressedSize = impl.rawCompress(uncompressed, uPos, uLen, compressed,
                 cPos);
 
