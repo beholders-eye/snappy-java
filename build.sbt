@@ -6,7 +6,7 @@ organizationName := "xerial.org"
 description      := "snappy-java: A fast compression/decompression library"
 
 ThisBuild / publishTo :=
-  Some("GitHub Packages" at "https://maven.pkg.github.com/m-rola/snappy-java")
+  Some("GitHub Packages" at "https://maven.pkg.github.com/beholders-eye/snappy-java")
 
 ThisBuild / credentials ++=
   (for {
