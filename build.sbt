@@ -15,12 +15,12 @@ ThisBuild / credentials ++=
   } yield Credentials("GitHub Package Registry", "maven.pkg.github.com", actor, token)).toSeq
 
 licenses := Seq("Apache-2.0" -> url("https://www.apache.org/licenses/LICENSE-2.0.html"))
-homepage := Some(url("https://github.com/xerial/snappy-java"))
+homepage := Some(url("https://github.com/beholders-eye/snappy-java"))
 scmInfo :=
   Some(
     ScmInfo(
-      browseUrl = url("https://github.com/xerial/snappy-java"),
-      connection = "scm:git@github.com:xerial/snappy-java.git"
+      browseUrl = url("https://github.com/beholders-eye/snappy-java"),
+      connection = "scm:git@github.com:beholders-eye/snappy-java.git"
     )
   )
 
