@@ -6,6 +6,10 @@ on:
       - v*
   workflow_dispatch:
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   publish_jvm:
     name: Publish
@@ -21,17 +25,7 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '21'
-      - name: Setup GPG
+      - name: Publish to GitHub Packages
         env:
-          PGP_SECRET: ${{ secrets.PGP_SECRET }}
-        run: echo $PGP_SECRET | base64 --decode | gpg --import --batch --yes
-      - name: Build bundle
-        env:
-          PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
-        run: |
-          ./sbt publishSigned
-      - name: Release to Sonatype
-        env:
-          SONATYPE_USERNAME: '${{ secrets.SONATYPE_USERNAME }}'
-          SONATYPE_PASSWORD: '${{ secrets.SONATYPE_PASSWORD }}'
-        run: ./sbt sonaRelease
+          GITHUB_TOKEN: ${{ github.token }}
+        run: ./sbt publish
