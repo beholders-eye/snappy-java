@@ -14,6 +14,10 @@ on:
       - '!*'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   publish_snapshots:
     name: Publish snapshots
@@ -33,8 +37,7 @@ jobs:
           path: ~/.cache
           key: ${{ runner.os }}-snapshot-${{ hashFiles('**/*.sbt') }}
           restore-keys: ${{ runner.os }}-snapshot-
-      - name: Publish snapshots
+      - name: Publish snapshots to GitHub Packages
         env:
-          SONATYPE_USERNAME: '${{ secrets.SONATYPE_USERNAME }}'
-          SONATYPE_PASSWORD: '${{ secrets.SONATYPE_PASSWORD }}'
+          GITHUB_TOKEN: ${{ github.token }}
         run: ./sbt publish
